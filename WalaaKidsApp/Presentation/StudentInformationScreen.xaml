@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="WalaaKidsApp.Presentation.StudentInformationScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalaaKidsApp.Presentation"
+             mc:Ignorable="d" 
+             x:Name="StudentInformationsUserControl"
+             FlowDirection="RightToLeft"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="Transparent"
+             Opacity="1"
+             d:Opacity="1"
+             d:DesignWidth="800" d:DesignHeight="800"
+             d:Background="#eff2f7">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox BorderThickness="2" Grid.Row="0" Header="بيانات الطالب" FontSize="15">
+            <GroupBox.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </GroupBox.BorderBrush>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource InputLabel}" Text="الرقم:"
+                           HorizontalAlignment="Right"
+                           FontSize="15"
+                           Grid.Row="0" Grid.Column="0"
+                           />
+                                    <TextBlock x:Name="IdTextBlock" Style="{StaticResource InputLabel}" d:Text="1" 
+                           HorizontalAlignment="Left"
+                           FontSize="15"
+                           Grid.Row="0" Grid.Column="1"
+                           />
+                <TextBlock Style="{StaticResource InputLabel}" Text="اسم الطالب:" 
+            HorizontalAlignment="Right"
+            FontSize="15"
+            Grid.Row="1" Grid.Column="0"
+            />
+                <TextBlock x:Name="NameTextBlock" Style="{StaticResource InputLabel}" d:Text="زين على جمال على محمد" 
+            HorizontalAlignment="Left"
+            FontSize="15"
+            Grid.Row="1" Grid.Column="1"
+            />
+                <TextBlock Style="{StaticResource InputLabel}" Text="السن:" 
+            HorizontalAlignment="Right"
+            FontSize="15"
+            Grid.Row="3" Grid.Column="0"
+            />
+                <TextBlock x:Name="AgeTextBlock" Style="{StaticResource InputLabel}" d:Text="4" 
+            HorizontalAlignment="Left"
+            FontSize="15"
+            Grid.Row="3" Grid.Column="1"
+            />
+                <TextBlock Style="{StaticResource InputLabel}" Text="الفصل:" 
+                 HorizontalAlignment="Right"
+                 FontSize="15"
+                 Grid.Row="0" Grid.Column="2"
+                 />
+                                <TextBlock x:Name="ClassroomTextBlock" Style="{StaticResource InputLabel}" Text="Yellow" 
+                 HorizontalAlignment="Left"
+                 FontSize="15"
+                 Grid.Row="0" Grid.Column="3"
+                 />
+                                <TextBlock Style="{StaticResource InputLabel}" Text="النوع:" 
+                HorizontalAlignment="Right"
+                FontSize="15"
+                Grid.Row="1" Grid.Column="2"
+                />
+                                <TextBlock x:Name="GenderTextBlock" Style="{StaticResource InputLabel}" d:Text="ذكر" 
+                HorizontalAlignment="Left"
+                FontSize="15"
+                Grid.Row="1" Grid.Column="3"
+                />
+            </Grid>
+        </GroupBox>
+        <GroupBox BorderThickness="2" Margin="0 20 0 0" Grid.Row="1" Header="بيانات ولى الأمر" FontSize="15">
+            <GroupBox.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </GroupBox.BorderBrush>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource InputLabel}" Text="اسم الأب:"
+                           HorizontalAlignment="Right"
+                           FontSize="15"
+                           Grid.Row="0" Grid.Column="0"
+                           />
+                <TextBlock x:Name="FatherNameTextBlock" Style="{StaticResource InputLabel}" d:Text="على جمال على محمد" 
+                           HorizontalAlignment="Left"
+                           FontSize="15"
+                           Grid.Row="0" Grid.Column="1"
+                           />
+                <TextBlock Style="{StaticResource InputLabel}" Text="اسم الام:" 
+            HorizontalAlignment="Right"
+            FontSize="15"
+            Grid.Row="1" Grid.Column="0"
+            />
+                <TextBlock x:Name="MotherNameTextBlock" Style="{StaticResource InputLabel}" d:Text="روان وائل يسرى" 
+            HorizontalAlignment="Left"
+            FontSize="15"
+            Grid.Row="1" Grid.Column="1"
+            />
+                <TextBlock Style="{StaticResource InputLabel}" Text="تليفون الاب:" 
+            HorizontalAlignment="Right"
+            FontSize="15"
+            Grid.Row="3" Grid.Column="0"
+            />
+                <TextBlock x:Name="FatherPhoneTextBlock" Style="{StaticResource InputLabel}" d:Text="01095720164" 
+            HorizontalAlignment="Left"
+            FontSize="15"
+            Grid.Row="3" Grid.Column="1"
+            />
+                <TextBlock Style="{StaticResource InputLabel}" Text="تليفون الام:" 
+                 HorizontalAlignment="Right"
+                 FontSize="15"
+                 Grid.Row="0" Grid.Column="2"
+                 />
+                <TextBlock x:Name="MotherPhoneTextBlock" Style="{StaticResource InputLabel}" d:Text="01225588421" 
+                 HorizontalAlignment="Left"
+                 FontSize="15"
+                 Grid.Row="0" Grid.Column="3"
+                 />
+                <TextBlock Style="{StaticResource InputLabel}" Text="الوظيفة:" 
+                HorizontalAlignment="Right"
+                FontSize="15"
+                Grid.Row="1" Grid.Column="2"
+                />
+                <TextBlock x:Name="JobTextBlock" Style="{StaticResource InputLabel}" d:Text="مصرفي البنك الاهلى" 
+                HorizontalAlignment="Left"
+                FontSize="15"
+                Grid.Row="1" Grid.Column="3"
+                />
+                <TextBlock Style="{StaticResource InputLabel}" Text="العنوان:" 
+                   HorizontalAlignment="Right"
+                   FontSize="15"
+                   Grid.Row="2" Grid.Column="2"
+                   />
+                <TextBlock  Name="AddressTextBlock" Style="{StaticResource InputLabel}" d:Text="حي الضواحي بورتكس الجمارك 2" 
+                   HorizontalAlignment="Left"
+                   FontSize="15"
+                   Grid.Row="2" Grid.Column="3"
+                   />
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

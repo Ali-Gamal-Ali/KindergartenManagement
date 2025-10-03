@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="WalaaKidsApp.Presentation.StudentOldSubscriptionsScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalaaKidsApp.Presentation"
+             mc:Ignorable="d" 
+             x:Name="StudentOldSubscriptionsUserControl"
+             FlowDirection="RightToLeft"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="Transparent"
+             Opacity="1"
+             d:Opacity="1"
+             d:DesignWidth="800" d:DesignHeight="800"
+             d:Background="#eff2f7"
+             Loaded="StudentOldSubscriptionsUserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox BorderThickness="2" Margin="0 10 0 0" Grid.Row="0" Header="قائم الاشتراكات السابقة" FontSize="15">
+            <GroupBox.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </GroupBox.BorderBrush>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="OldSubscriptionsList" Grid.Column="0" Height="100" Margin="10,10,0,0" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top"
+                          ItemsSource="{Binding OldSubscriptions}" SelectedItem="{Binding SelectedSubscription}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="رقم الاشتراك" Width="auto" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="تاريخ البداية" Width="auto" DisplayMemberBinding="{Binding LocalSubscriptionDateOnly}"/>
+                            <GridViewColumn Header="تاريخ النهاية" Width="auto" DisplayMemberBinding="{Binding LocalExpiryDateOnly}"/>
+                            <GridViewColumn Header="قيمة الاشتراك" Width="auto" DisplayMemberBinding="{Binding SubscriptionAmount}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox BorderThickness="2" Margin="0 10 0 0" Grid.Row="1" Header="الدفعات السابقة" FontSize="15">
+            <GroupBox.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </GroupBox.BorderBrush>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <ListView  Grid.Column="0" Height="100" Margin="10,10,0,0" Width="500" HorizontalAlignment="Left" VerticalAlignment="Top"
+                          ItemsSource="{Binding SubscriptionPayments}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="التاريخ" Width="auto" DisplayMemberBinding="{Binding LocalPaymentDateOnly}"/>
+                            <GridViewColumn Header="القيمة" Width="auto" DisplayMemberBinding="{Binding PaymentAmount}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Margin="5 80 0 0" Orientation="Horizontal"  Grid.Column="1" HorizontalAlignment="Left" >
+                    <TextBlock FontWeight="ExtraBold"  Text="اجمالي المدفوع: "  />
+                    <TextBlock x:Name="TotalTextBlock"   d:Text="2000" Foreground="Green" FontWeight="ExtraBold" Margin="4 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

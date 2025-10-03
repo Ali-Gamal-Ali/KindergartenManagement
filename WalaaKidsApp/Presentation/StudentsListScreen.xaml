@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="WalaaKidsApp.Presentation.StudentsListScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalaaKidsApp.Presentation"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             x:Name="StudentListUserControl"
+             FlowDirection="RightToLeft"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="Transparent"
+             Opacity="0"
+             d:Opacity="1"
+             d:DesignWidth="800" d:DesignHeight="800"
+             d:Background="#eff2f7"
+             Loaded="AddClassroomUserControl_Loaded">
+    
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation 
+                  Storyboard.TargetProperty="Opacity"
+             Storyboard.TargetName="StudentListUserControl"
+                  From="0" To="1"
+                  Duration="0:0:0.4" />
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0 0 0 2">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Grid 
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Top"
+                 Grid.Row="0"
+                 Width="270"
+      >
+                <TextBlock FontWeight="SemiBold" 
+                    Text="بحث :"
+                    VerticalAlignment="Center"
+             />
+                <TextBox x:Name="KeywordTextBox" Width="200" Height="35" Padding="10 8 30 0" 
+                         d:Text="زين على جمال على محمد فرغلى" KeyDown="KeywordTextBox_KeyDown"/>
+                
+                <Button Name="SearchButton" Click="SearchButton_Click" 
+                        Style="{StaticResource SearchButton}" HorizontalAlignment="Right" Margin="0 0 40 0">
+                    <icon:PackIconMaterial Kind="Magnify" Width="25" Height="20">
+                        <icon:PackIconMaterial.Foreground>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#662D8C" Offset="1"/>
+                                <GradientStop Color="#ED1E79" Offset=".1"/>
+                            </LinearGradientBrush>
+                        </icon:PackIconMaterial.Foreground>
+                    </icon:PackIconMaterial>
+                </Button>
+            </Grid>
+        </Border>
+       
+       
+            <ListView  Margin="5,0,3,0" Name="ClassroomListView"
+                  Grid.Row="1" 
+                  ItemsSource="{Binding Classrooms}"
+                  SelectionChanged="ListView_SelectionChanged"
+                  FontSize="15" Background="Transparent" 
+                  Height="60" BorderBrush="Transparent"
+                  HorizontalAlignment="Stretch"
+                  VerticalContentAlignment="Center"
+                  SelectedIndex="0"
+                 >
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Opacity" Value=".5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Opacity" Value="1">
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Rectangle Width="20" Height="20" Margin="0,0,5,0" Fill="{Binding ColorBrush}"  Stroke="Black"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <DataGrid Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}" 
+                  Grid.Row="2"
+                  Margin="5"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  VerticalScrollBarVisibility="Auto"
+                  HeadersVisibility="Column"
+                  ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding SelectedStudent}"
+                  HorizontalContentAlignment="Center"
+                  MouseDoubleClick="DataGrid_MouseDoubleClick"
+                  SelectionMode="Single" SelectionUnit="FullRow"
+                  MouseLeftButtonDown="DataGrid_MouseLeftButtonDown"
+                  >
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="الرقم" Width="auto" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="الاسم" Width="auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="تليفون" Width="auto" Binding="{Binding Guardian.PhoneNumber}"/>
+                <DataGridTemplateColumn Header="الفصل" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Ellipse Width="20" Height="20" Fill="{Binding Classroom.ColorBrush}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="مبالغ متبقية" Width="auto" Binding="{Binding AmountDue}"/>
+                <DataGridTextColumn Header="نوع الاشتراك " Width="auto" Binding="{Binding SubscriptionType}"/>
+                <DataGridTemplateColumn Width="auto" Header="خيارات">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="auto" Orientation="Horizontal" VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                               
+                                <Button x:Name="EditButton" Style="{StaticResource SearchButton}" ToolTip="تعديل" Click="EditButton_Click">
+                                    <icon:PackIconMaterial Kind="Pencil" Foreground="#ED1E79"/>
+                                </Button>
+                                <Button x:Name="StudentDetailsButton" Style="{StaticResource SearchButton}" 
+                                        Click="StudentDetailsButton_Click" ToolTip="تفاصيل">
+                                    <icon:PackIconMaterial Kind="ListBox" Foreground="#ED1E79"/>
+                                </Button>
+                                <Button x:Name="BusSubscriptionButton" Style="{StaticResource SearchButton}" 
+                                        Click="BusSubscriptionButton_Click" ToolTip="اشتراك بالباص">
+                                    <icon:PackIconMaterial Kind="Bus" Foreground="#ED1E79"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

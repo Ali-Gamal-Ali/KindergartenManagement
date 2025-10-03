@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="WalaaKidsApp.Presentation.AddClassroomScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalaaKidsApp.Presentation"
+             mc:Ignorable="d" 
+             x:Name="AddClassroomUserControl"
+             FlowDirection="RightToLeft"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="Transparent"
+             Opacity="0"
+             d:Opacity="1"
+             d:DesignWidth="800" d:DesignHeight="800"
+             d:Background="#eff2f7"
+             Loaded="AddClassroomUserControl_Loaded">
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation 
+                  Storyboard.TargetProperty="Opacity"
+             Storyboard.TargetName="AddClassroomUserControl"
+                  From="0" To="1"
+                  Duration="0:0:0.4" />
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox x:Name="StudentDetailsGroupBox"
+              RenderTransformOrigin="0,0" 
+              BorderThickness="1" 
+              Header="اضافة فصل جديد" 
+              >
+            <GroupBox.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="#662D8C" Offset="1"/>
+                    <GradientStop Color="#ED1E79" Offset=".1"/>
+                </LinearGradientBrush>
+            </GroupBox.BorderBrush>
+            <Grid Margin="10 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock  Grid.Column="0"
+                 Grid.Row="0"
+                 Style="{StaticResource InputLabel}"
+                 Text="الاسم :"
+                 HorizontalAlignment="Right"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource InputLabel}"
+        Text="اللون :"
+        HorizontalAlignment="Right"/>
+
+
+
+
+                <TextBox x:Name="ClassroomNameTextBox" TabIndex="0" Margin="0 20 0 20" Grid.Column="1" Grid.Row="0" Width="200" Text="{Binding Path=ClassroomName, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+                <Popup PlacementTarget="{Binding ElementName=ClassroomNameTextBox}"
+                    Placement="Right"
+                    AllowsTransparency="True"
+                    StaysOpen="True"
+                    IsOpen="{Binding Mode=OneWay, ElementName=ClassroomNameTextBox,Path=(Validation.Errors).Count,Converter={StaticResource CountToBoolConverter}}">
+                    <Border Background="LightPink" BorderBrush="Red" BorderThickness="1" Padding="4">
+                        <TextBlock Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=ClassroomNameTextBox}" />
+                    </Border>
+                </Popup>
+                <ComboBox Grid.Row="1" Grid.Column="1" 
+                          x:Name="ColorPicker"
+                          Height="30"
+                          ItemsSource="{Binding AvailableColors}"
+                          SelectedItem="{Binding SelectedColor,Mode=OneWayToSource}"
+                          SelectedIndex="0"
+                          TabIndex="1"
+                          VerticalContentAlignment="Center"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Rectangle Width="16" Height="16" Margin="0,0,5,0" Fill="{Binding ColorBrush}"  Stroke="Black"/>
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button x:Name="SaveButton" TabIndex="2"
+                        Margin="0 20 0 0"
+                    Grid.Row="5" 
+                    Content="حفظ"
+                    Style="{StaticResource ContentButton}" 
+                    HorizontalAlignment="Left"
+                    Grid.ColumnSpan="2" Click="SaveButton_Click"
+                    >
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AddStudentConverter}">
+                            <Binding ElementName="ClassroomNameTextBox" Path="(Validation.HasError)"/>
+                            <Binding ElementName="ClassroomNameTextBox" Path="Text"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+
+            </Grid>
+
+        </GroupBox>
+
+    </Grid>
+</UserControl>

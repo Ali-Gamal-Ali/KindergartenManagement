@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="WalaaKidsApp.Presentation.Dashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalaaKidsApp.Presentation"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             Name="DashboardUserControl"
+             FlowDirection="RightToLeft"
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch"
+             Margin="10"
+             Background="Transparent"
+             d:DesignWidth="800" d:DesignHeight="600"
+             d:Background="White"
+             Opacity="0"
+             d:Opacity="1"
+             Loaded="UserControl_Loaded"
+             >
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation 
+              Storyboard.TargetProperty="Opacity"
+         Storyboard.TargetName="DashboardUserControl"
+              From="0" To="1"
+              Duration="0:0:0.4" />
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Image Source="pack://application:,,,/Images/LogoCompressed.png" 
+               VerticalAlignment="Top"
+               Stretch="Fill"
+               Width="200" Height="80"/>
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Grid.Row="0">
+
+            <Border Width="200"
+                    Height="120" CornerRadius="20">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#662D8C" Offset="1"/>
+                        <GradientStop Color="#ED1E79" Offset=".1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock d:Text="عدد الطلاب" 
+                           
+                           x:Name="StudentCountTextBlock"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontWeight="SemiBold"
+                           FontSize="22"
+                           TextAlignment="Center"
+                           />
+            </Border>
+
+
+            <Border Width="200"
+          Height="120" CornerRadius="20" Margin="20 0 0 0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#662D8C" Offset="1"/>
+                        <GradientStop Color="#ED1E79" Offset=".1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock d:Text="ايرادات الشهر" 
+                           Name="CurrentMonthRevenue"
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Center"
+                 Foreground="White"
+                 FontWeight="SemiBold"
+                 FontSize="22"
+                                            TextAlignment="Center"
+
+                 />
+            </Border>
+
+            <Border Width="200"
+          Height="120" CornerRadius="20" Margin="20 0 0 0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#662D8C" Offset="1"/>
+                        <GradientStop Color="#ED1E79" Offset=".1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock d:Text="متأخرات سداد" 
+                           Name="TotalAmountDueTextBlock"
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Center"
+                 Foreground="White"
+                 FontWeight="SemiBold"
+                 FontSize="22"
+                 TextAlignment="Center"
+                 />
+            </Border>
+
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <StackPanel  HorizontalAlignment="Left" 
+                         Orientation="Vertical"
+                         Margin="10 0 0 0">
+                <Border 
+                 Width="350" 
+                 Height="30"
+                 CornerRadius="10"
+                 >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#662D8C" Offset="1"/>
+                            <GradientStop Color="#ED1E79" Offset=".1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock 
+                     HorizontalAlignment="Center"
+                     Text="كثافة الفصول"
+                     Foreground="White"
+                     FontWeight="SemiBold"
+                     VerticalAlignment="Center"
+                     />
+                </Border>
+                <lvc:CartesianChart 
+                Series="{Binding ColumnSeriesCollection}" 
+                 Width="350" Height="220" Background="Transparent"
+                LegendLocation="None"
+                BorderThickness="2"
+                BorderBrush="LightGray"
+                HorizontalAlignment="Left"
+                >
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Foreground="Black" 
+                              FontWeight="Normal" 
+                              FontSize="12"
+                              Labels="{Binding Labels}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" Stroke="LightGray"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="عدد الطلاب" 
+                              FontSize="12"
+                              Foreground="Black" 
+                              FontWeight="Normal">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Stroke="LightGray"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+
+            </StackPanel>
+            
+            <StackPanel
+                HorizontalAlignment="Right" 
+                Orientation="Vertical"
+                Margin="0 0 30 0"
+                
+                >
+                <Border 
+                    Width="300" 
+                    Height="30"
+                    CornerRadius="10"
+                    >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#662D8C" Offset="1"/>
+                            <GradientStop Color="#ED1E79" Offset=".1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock 
+                        HorizontalAlignment="Center"
+                        Text="اشتراكات مدفوعة بالكامل \ غير مدفوعة بالكامل"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        VerticalAlignment="Center"
+                        />
+                </Border>
+                <lvc:PieChart 
+                 Width="350"
+                 Height="220"
+                 LegendLocation="Right"                 
+                 BorderThickness="2"
+                 BorderBrush="LightGray"
+                 Series="{Binding PieSeriesCollection}"/>
+            </StackPanel>
+
+        </Grid>
+
+
+    </Grid>
+
+</UserControl>
